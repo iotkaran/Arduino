@@ -1,0 +1,12 @@
+{
+    "name": "Iotkaran",
+    "keywords": "m2m, iot, Iotkaran",
+    "description": "A library for connecting to the Iotkaran IoT platform.",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/iotkaran/Arduino"
+    },
+    "version": "0.5",
+    "examples": "examples/*/*.ino",
+    "frameworks": "arduino"
+}
