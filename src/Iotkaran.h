@@ -2,14 +2,15 @@
 #include <ESP8266WiFi.h>
 #include <ArduinoJson.h>
 extern WiFiClient client;
-extern const char* host ;
-extern const uint16_t port ;
+
 
 class Iotkaran
 {
-public:
-	void status();
-	void disconnection();
-	void connection();
-	void send();
+  public:
+    bool status();
+    void send(String Input);
+    void authentication(String Token);
+    void connect(const char* host, const uint16_t port);
+    void reconnect(const char* host, const uint16_t port);
+
 };
