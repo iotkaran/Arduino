@@ -1,48 +1,63 @@
 #include "Iotkaran.h"
-const char* host = "server.Iotkaran.ir";
-const uint16_t port = 2323;
 WiFiClient client;
 
 
-void Iotkaran::status()
+void Iotkaran::connect(const char* host, const uint16_t port)
 {
-    if (client.connected())
-    {
-        Serial.println("The client connected");
-    }
-    else if (!client.connected())
-    {
-        Serial.println("The client disconnected");
-    }
+  Serial.print("connecting to ");
+  Serial.print(host);
+  Serial.print(':');
+  Serial.println(port);
+
+  while (!client.connect(host, port))
+  {
+    delay(500);
+    Serial.print(".");
+  }
 }
 
-void Iotkaran::disconnection()
+void Iotkaran::reconnect(const char* host, const uint16_t port)
 {
-    client.stop();
+  Serial.print("connecting to ");
+  Serial.print(host);
+  Serial.print(':');
+  Serial.println(port);
+
+  while (!client.connect(host, port))
+  {
+    delay(500);
+    Serial.print(".");
+  }
+}
+void Iotkaran::send(String Input)
+{
+
+  String A = Input + '\r' + '\n';
+
+  client.print(A);
 }
 
-void Iotkaran::connection()
+void Iotkaran::authentication(String Token)
 {
-    Serial.print("connecting to ");
-    Serial.print(host);
-    Serial.print(':');
-    Serial.println(port);
+  DynamicJsonDocument doc(1536);
+  doc["Token"] = Token;
+  String Output;
+  serializeJson(doc, Output);
+  Serial.print("Send to server:   ");
+  Serial.println(Output);
+  String A = Output + '\r' + '\n';
 
-    while (!client.connect(host, port))
-    {
-        delay(500);
-        Serial.print(".");
-    }
+  client.print(A);
 }
 
-
-void Iotkaran::send()
+bool Iotkaran::status()
 {
-    DynamicJsonDocument doc(1536);
-    doc["Token"] = "1111";
-    String Output;
-    serializeJson(doc, Output);
-    Serial.print("Send to server:   ");
-    Serial.println(Output);
-    client.print(Output);
+  if (client.connected())
+  {
+    return true;
+  }
+  else if (!client.connected())
+  {
+    return false;
+  }
 }

@@ -1,9 +1,10 @@
 #include <Iotkaran.h>
+#define Token  "enter your token here"
 
 unsigned long Timeout, status_time;
 
-const char* ssid = "mohamad";
-const char* password = "13750921";
+const char* ssid = "enter ssid wifi here";
+const char* password = "enter wifi password here";
 Iotkaran IK;
 
 
@@ -31,10 +32,8 @@ void setup() {
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
 
-  IK.connection();
-  IK.send();
-  IK.disconnection();
-
+  IK.connect("server.Iotkaran.ir" , 2323);   //Enter a host address and port
+  IK.authentication(Token);
 }
 
 void loop() {
