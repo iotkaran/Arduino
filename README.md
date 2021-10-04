@@ -1,6 +1,6 @@
 
 # Arduino Iotkaran
 
-This library provides access to Iotkaran platform over TCP/IP protocol.
+This library provides access to Iotkaran platform over MQTT protocol.
 
 
